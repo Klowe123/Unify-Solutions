@@ -134,6 +134,7 @@ Conclusion: This approach allows you to neatly pass property information using s
     - Use available cancellation tokens to provide a way to stop api calls if they are failling to complete or need to be stopped by the calling application for any reason
 2. Models:
     - Commenting on the properties and classes in the model folder
+    - Replace strings with Enums where it is appropriate, such as the status property on Pet
 3. Tests:
     - Move Extensions class to separate library which would also have unit tests
     - Investigate supporting more than just string based properties in the Extesnion method
@@ -142,3 +143,7 @@ Conclusion: This approach allows you to neatly pass property information using s
 4. General:
     - Enquire about the use of a console application. Is this really the desired way the enterprise wants to retrieve this data?
     - Use built in .Net IOC container to inject required components
+
+## Notes:
+
+I have not mentioned adding authentication into the above considerations as it is not required for this API. However this would also be a common requirement to be added to the Client if requried by the API it was calling
