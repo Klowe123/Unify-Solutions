@@ -80,11 +80,14 @@ Finally, please note that the Category and Tags properties are complex types, re
 **Answer** In .NET, you can pass a PropertyInfo into a method using expressions by utilizing the Expression<Func<T, object>> syntax. This allows you to specify a lambda expression that references a property on an object, and then extract the PropertyInfo from this expression within the method. Here's a step-by-step guide on how to do this:
 
 1. Define the Method: First, define a method that accepts an expression as a parameter. This expression represents a function that takes an object of type T and returns a property of this object.
-        public static PropertyInfo GetPropertyInfo<T>(Expression<Func<T, object>> propertyLambda)
-        {
-            // Method implementation will go here
-        }
+        
+       public static PropertyInfo GetPropertyInfo<T>(Expression<Func<T, object>> propertyLambda)
+       {
+           // Method implementation will go here
+       }
+
 2. Extract MemberInfo from the Expression: Within the method, you need to extract the MemberInfo from the provided expression. The expression's body might be a UnaryExpression (if the property is of a value type) or a MemberExpression (if the property is of a reference type).
+
         public static PropertyInfo GetPropertyInfo<T>(Expression<Func<T, object>> propertyLambda)
         {
             MemberExpression member = propertyLambda.Body as MemberExpression;
@@ -103,13 +106,16 @@ Finally, please note that the Category and Tags properties are complex types, re
             }
 
             return member.Member as PropertyInfo;
-        }
+        }        
+
 3. Using the Method: You can now use this method to get the PropertyInfo of a property. For example, if you have a class Person with a property Name, you can get the PropertyInfo of Name like this:
+        
         public class Person
         {
             public string Name { get; set; }
         }
         PropertyInfo propertyInfo = GetPropertyInfo<Person>(p => p.Name);
+
 4.Handling Different Types: This method handles both reference and value type properties due to the inclusion of the UnaryExpression check. If the property is a value type, the expression body will be a UnaryExpression, and the actual MemberExpression will be the operand of this unary expression.
 
 Conclusion: This approach allows you to neatly pass property information using simple lambda expressions, enhancing the readability and maintainability of your code. It can be particularly useful in scenarios like implementing INotifyPropertyChanged, creating generic data access layers, or building dynamically-typed queries.
