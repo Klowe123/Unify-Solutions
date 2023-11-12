@@ -120,3 +120,25 @@ Finally, please note that the Category and Tags properties are complex types, re
 
 Conclusion: This approach allows you to neatly pass property information using simple lambda expressions, enhancing the readability and maintainability of your code. It can be particularly useful in scenarios like implementing INotifyPropertyChanged, creating generic data access layers, or building dynamically-typed queries.
 
+## Changes for enterprise:
+
+1. PetstoreClient Changes:
+    - Ceate abstract base class to handle logic that could be shared by multiple 'clients' such as retry logic
+    - Create interface and define public API on that interface to make it simple to replace the client if needed
+    - Commenting on the public API 
+    - Pass in ILogger to allow logging of errors
+    - Investigate using IAsyncEnumerables to stream the data back to the client to improve time to first repsonse for the user
+    - Add a PetValidator class that is passed into the client. This class would be responsible for validating the data returned from the api is what is expected
+    - Turn the status code into an Enum and refactor GetAvailablePetsAsync to GetPetsAsync(Status status, CancellationToken cancellationToken = default)
+    - Move endpoint strings to constants all located in one area of the file
+    - Use available cancellation tokens to provide a way to stop api calls if they are failling to complete or need to be stopped by the calling application for any reason
+2. Models:
+    - Commenting on the properties and classes in the model folder
+3. Tests:
+    - Move Extensions class to separate library which would also have unit tests
+    - Investigate supporting more than just string based properties in the Extesnion method
+    - Commenting in the extension class
+    - Use separate enum in the extension class to what is used in the Petstore client as this ties the two unrelated objects together
+4. General:
+    - Enquire about the use of a console application. Is this really the desired way the enterprise wants to retrieve this data?
+    - Use built in .Net IOC container to inject required components
