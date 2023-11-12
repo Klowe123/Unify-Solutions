@@ -122,7 +122,7 @@ Conclusion: This approach allows you to neatly pass property information using s
 
 ## Changes for enterprise:
 
-1. PetstoreClient Changes:
+1. PetstoreClient:
     - Ceate abstract base class to handle logic that could be shared by multiple 'clients' such as retry logic
     - Create interface and define public API on that interface to make it simple to replace the client if needed
     - Commenting on the public API 
