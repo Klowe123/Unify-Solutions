@@ -25,5 +25,13 @@ namespace unifysolutions.technical_test.Tests
             var result = await _petstoreClient.GetAvailablePetsOrderByNameAsync(SortOrder.Ascending);
             Assert.That.CollectionIsInExpectedOrderBasedOnStringProperty(result, r => r.Name, SortOrder.Ascending);
         }
+
+        [TestMethod]
+        public async Task GetAvailablePetsOrderByNameAsync_ReturnsPetsWithStatusOfAvailableOnly()
+        {
+            var result = await _petstoreClient.GetAvailablePetsOrderByNameAsync(SortOrder.Ascending);
+
+            Assert.IsTrue(result.All(pet => pet.Status == "available"));
+        }
     }
 }

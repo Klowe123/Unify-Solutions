@@ -48,7 +48,7 @@ namespace unifysolutions.technical_test.Client
             {
                 Console.WriteLine("Could reach pet store /pet/findByStatus endpoint");
                 throw;
-            }
+            } 
             
         }
 

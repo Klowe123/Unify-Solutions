@@ -24,7 +24,7 @@ namespace unifysolutions.technical_test.Model
         [JsonPropertyName("tags")]
         public List<Tag> Tags { get; set; }
 
-        [JsonPropertyName("stauts")]
+        [JsonPropertyName("status")]
         public string Status { get; set; }
     }
 }
